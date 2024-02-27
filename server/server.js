@@ -8,35 +8,32 @@ require('dotenv').config();
 const UserModel = require('./Models/Users');
 
 app.use(cors());
-app.use(express.json()); // Ajout de cette ligne pour pouvoir utiliser req.body
+app.use(express.json()); 
 
-// Route pour la création d'un nouvel utilisateur
+//Creation de Users
 app.post('/api/users', async (req, res) => {
   try {
-    const { name, age, email } = req.body; // Assurez-vous que votre formulaire envoie ces champs
-
-    // Création d'un nouvel utilisateur
+    const { name, age, email } = req.body; 
     const newUser = new UserModel({ name, age, email });
     await newUser.save();
 
-    res.status(201).json(newUser); // Répondre avec le nouvel utilisateur créé
+    res.status(201).json(newUser); 
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-// Route pour récupérer tous les utilisateurs
-app.get('/api/users', async (req, res) => {
-  try {
-    const users = await UserModel.find();
-    res.json(users);
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+// Prendre les Users
+app.get('/api/users', async(req,res)=>{
+  try{
+    const users= await UserModel.find();
+    res.json(users);}
+    catch(error){
+      console.log('Error fetching users:', error);
+      res.status(500).json({error:'Internal Server Error'});
+    }
 });
-
+//Connection a MDB
 mongoose
   .connect(
     `mongodb+srv://omartakyot:${process.env.MONGODB_PASSWORD}@cluster0.mxrkn5l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
