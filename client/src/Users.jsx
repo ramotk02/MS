@@ -74,7 +74,9 @@ const Users = () => {
                         <h2 className="text-xl font-bold">{user.name}</h2>
                         <p>Age: {user.age} years old</p>
                         <p>Email: {user.email}</p>
+                        <button type='delete'>Delete</button>
                     </div>
+
                 ))}
             </div>
             <div className='flex h-[200px] bg-slate-500 p-4'>
