@@ -36,6 +36,21 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+app.put('/api/users/:id', async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    user.name = req.body.name;
+    user.age = req.body.age;
+    user.email = req.body.email;
+
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Delete User:
 app.delete('/api/users/:id', async (req, res) => {
   try {
