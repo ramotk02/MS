@@ -76,7 +76,7 @@ const Users = () => {
                         <p>Email: {user.email}</p>
                         <button type='delete'>Delete</button>
                     </div>
-
+                    
                 ))}
             </div>
             <div className='flex h-[200px] bg-slate-500 p-4'>

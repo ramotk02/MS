@@ -36,9 +36,11 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+// Update Users
 app.put('/api/users/:id', async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);
+    
     user.name = req.body.name;
     user.age = req.body.age;
     user.email = req.body.email;
